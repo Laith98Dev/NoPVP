@@ -7,7 +7,7 @@ Command | Description | Aliases
 `/nopvp` | `NoPVP Command` | `/np`
 
 # Features
-- You can change message from data.yml and you can disabled it just set to ""
+- You can change message from ```data.yml``` and you can disabled it just set to ""
 
 # Other
 
