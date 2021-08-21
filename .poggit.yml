@@ -2,5 +2,10 @@
 build-by-default: true
 branches:
 - main
-projects: []
+projects:
+    NoPVP:
+        path: ""
+        libs:
+            - src: jojoe77777/FormAPI/libFormAPI
+              version: ^1.3
 ...
