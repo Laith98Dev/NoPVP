@@ -1,0 +1,18 @@
+name: NoPVP
+api: [3.0.0]
+main: Laith98Dev\NoPVP\Main
+author: Laith98Dev
+website: https://github.com/Laith98Dev
+version: 1.0.0
+
+commands:
+  nopvp:
+    description: NoPVP Command
+    permission: np.command.staff
+    aliases:
+     - np
+
+permissions:
+  np.command.staff:
+    default: op
+    description: "Allow player to use NoPVP command"
