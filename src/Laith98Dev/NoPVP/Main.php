@@ -138,6 +138,7 @@ class Main extends PluginBase implements Listener
 			$task = $this->unsetTasks[$player->getName()];
 			if($task->getHandler() !== null)
 				$task->getHandler()->cancel();
+			unset($this->unsetTasks[$player->getName()]);
 		} else {
 			$task = new unSetArrayTask($this, $player->getName());
 			$this->getScheduler()->scheduleDelayedTask($task, 10 * 20);
