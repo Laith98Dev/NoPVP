@@ -56,10 +56,8 @@ use jojoe77777\FormAPI\ModalForm;
 
 class Main extends PluginBase implements Listener 
 {
-	/** @var string[] */
 	public $manageSession = [];
 	
-	/** @var string[] */
 	public $unsetTasks = [];
 	
 	public function onEnable(){
