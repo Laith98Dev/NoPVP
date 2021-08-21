@@ -218,24 +218,3 @@ class Main extends PluginBase implements Listener
 		}
 	}
 }
-
-class unSetArrayTask extends Task 
-{
-	/** @var Main */
-	private $plugin;
-	
-	/** @var string */
-	private $name;
-	
-	public function __construct(Main $plugin, string $name){
-		$this->plugin = $plugin;
-		$this->name = $name;
-	}
-	
-	public function onRun(int $tick){
-		if(isset($this->plugin->manageSession[$this->name]))
-			unset($this->plugin->manageSession[$this->name]);
-		
-		$this->getHandler()->cancel();
-	}
-}
