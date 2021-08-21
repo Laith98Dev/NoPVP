@@ -54,6 +54,9 @@ class unSetArrayTask extends Task
 		if(isset($this->plugin->manageSession[$this->name]))
 			unset($this->plugin->manageSession[$this->name]);
 		
+		if(isset($this->plugin->unsetTasks[$this->name]))
+			unset($this->plugin->unsetTasks[$this->name]);
+		
 		$this->getHandler()->cancel();
 	}
 }
