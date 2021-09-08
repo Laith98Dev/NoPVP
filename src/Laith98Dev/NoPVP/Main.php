@@ -64,7 +64,7 @@ class Main extends PluginBase implements Listener
 		@mkdir($this->getDataFolder());
 		
 		(new Config($this->getDataFolder() . "data.yml", Config::YAML, [
-			"attack-msg" => "&cPVP now allowed here!",
+			"attack-msg" => "&cPVP not allowed here!",
 			"worlds" => []
 		]));
 		
