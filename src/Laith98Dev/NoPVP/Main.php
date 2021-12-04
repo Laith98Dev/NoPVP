@@ -38,12 +38,12 @@ namespace Laith98Dev\NoPVP;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 
-use pocketmine\level\Level;
+use pocketmine\world\World;
 
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\utils\{Config, TextFormat as TF};
 
 use pocketmine\command\{Command, CommandSender};
@@ -60,11 +60,11 @@ class Main extends PluginBase implements Listener
 	
 	public $unsetTasks = [];
 	
-	public function onEnable(){
+	public function onEnable(): void{
 		@mkdir($this->getDataFolder());
 		
 		(new Config($this->getDataFolder() . "data.yml", Config::YAML, [
-			"attack-msg" => "&cPVP not allowed here!",
+			"attack-msg" => "&cPVP now allowed here!",
 			"worlds" => []
 		]));
 		
@@ -112,7 +112,7 @@ class Main extends PluginBase implements Listener
 		
 		$worlds = [];
 		foreach ($this->getServer()->getLevels() as $level){
-			if(!($level instanceof Level))
+			if(!($level instanceof World))
 				continue;
 			$worlds[] = $level->getFolderName();
 			$form->addButton($level->getFolderName());
@@ -204,7 +204,7 @@ class Main extends PluginBase implements Listener
 			if($event instanceof EntityDamageByEntityEvent && ($damager = $event->getDamager()) instanceof Player){
 				$data = new Config($this->getDataFolder() . "data.yml", Config::YAML);
 				if($data->get("worlds")){
-					if(($level = $entity->getLevel()) instanceof Level){
+					if(($level = $entity->getLevel()) instanceof World){
 						$worlds = $data->get("worlds");
 						if(isset($worlds[$level->getFolderName()]) && $worlds[$level->getFolderName()]["pvp"] === false){
 							if($data->get("attack-msg") && $data->get("attack-msg") !== "")
