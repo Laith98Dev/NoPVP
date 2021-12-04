@@ -50,7 +50,7 @@ class unSetArrayTask extends Task
 		$this->name = $name;
 	}
 	
-	public function onRun(int $tick){
+	public function onRun(): void{
 		if(isset($this->plugin->manageSession[$this->name]))
 			unset($this->plugin->manageSession[$this->name]);
 		
