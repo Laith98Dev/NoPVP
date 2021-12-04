@@ -10,7 +10,7 @@ commands:
     description: NoPVP Command
     permission: np.command.staff
     aliases:
-     - np
+     - np 
 
 permissions:
   np.command.staff:
