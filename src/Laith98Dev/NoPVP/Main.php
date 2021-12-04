@@ -111,7 +111,7 @@ class Main extends PluginBase implements Listener
 		$form->setTitle("NoPVP");
 		
 		$worlds = [];
-		foreach ($this->getServer()->getLevels() as $level){
+		foreach ($this->getServer()->getWorlds() as $level){
 			if(!($level instanceof World))
 				continue;
 			$worlds[] = $level->getFolderName();
@@ -204,12 +204,12 @@ class Main extends PluginBase implements Listener
 			if($event instanceof EntityDamageByEntityEvent && ($damager = $event->getDamager()) instanceof Player){
 				$data = new Config($this->getDataFolder() . "data.yml", Config::YAML);
 				if($data->get("worlds")){
-					if(($level = $entity->getLevel()) instanceof World){
+					if(($level = $entity->getWorld()) instanceof World){
 						$worlds = $data->get("worlds");
 						if(isset($worlds[$level->getFolderName()]) && $worlds[$level->getFolderName()]["pvp"] === false){
 							if($data->get("attack-msg") && $data->get("attack-msg") !== "")
 								$damager->sendMessage(str_replace("&", TF::ESCAPE, $data->get("attack-msg")));
-							$event->setCancelled();
+							$event->can();
 						}
 					}
 				}
