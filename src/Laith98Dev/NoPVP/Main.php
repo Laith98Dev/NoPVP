@@ -111,7 +111,7 @@ class Main extends PluginBase implements Listener
 		$form->setTitle("NoPVP");
 		
 		$worlds = [];
-		foreach ($this->getServer()->getWorlds() as $level){
+		foreach ($this->getServer()->getWorldManager()->getWorlds() as $level){
 			if(!($level instanceof World))
 				continue;
 			$worlds[] = $level->getFolderName();
@@ -209,7 +209,7 @@ class Main extends PluginBase implements Listener
 						if(isset($worlds[$level->getFolderName()]) && $worlds[$level->getFolderName()]["pvp"] === false){
 							if($data->get("attack-msg") && $data->get("attack-msg") !== "")
 								$damager->sendMessage(str_replace("&", TF::ESCAPE, $data->get("attack-msg")));
-							$event->can();
+							$event->cancel();
 						}
 					}
 				}
