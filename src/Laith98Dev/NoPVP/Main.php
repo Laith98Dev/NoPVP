@@ -49,22 +49,23 @@ use pocketmine\utils\{Config, TextFormat as TF};
 use pocketmine\command\{Command, CommandSender};
 
 use pocketmine\scheduler\Task;
+use pocketmine\scheduler\ClosureTask;
 
-use jojoe77777\FormAPI\SimpleForm;
-use jojoe77777\FormAPI\CustomForm;
-use jojoe77777\FormAPI\ModalForm;
+use Laith98Dev\NoPVP\libs\jojoe77777\FormAPI\SimpleForm;
+use Laith98Dev\NoPVP\libs\jojoe77777\FormAPI\CustomForm;
+use Laith98Dev\NoPVP\libs\jojoe77777\FormAPI\ModalForm;
 
 class Main extends PluginBase implements Listener 
 {
-	public $manageSession = [];
+	public array $manageSession = [];
 	
-	public $unsetTasks = [];
+	public array $unsetTasks = [];
 	
 	public function onEnable(): void{
 		@mkdir($this->getDataFolder());
 		
 		(new Config($this->getDataFolder() . "data.yml", Config::YAML, [
-			"attack-msg" => "&cPVP now allowed here!",
+			"attack-msg" => "&cPVP not allowed here!",
 			"worlds" => []
 		]));
 		
@@ -124,9 +125,13 @@ class Main extends PluginBase implements Listener
 		} else {
 			$form->setContent("Select world to manage:");
 			$this->manageSession[$player->getName()] = $worlds;
-			$task = new unSetArrayTask($this, $player->getName());
-			$this->getScheduler()->scheduleDelayedTask($task, 10 * 20);
-			$this->unsetTasks[$player->getName()] = $task;
+			
+			$this->unsetTasks[$player->getName()] = 1;
+			$this->getScheduler()->scheduleDelayedTask(new ClosureTask( function() use ($player): void{
+				if(isset($this->unsetTasks[$player->getName()]))
+					unset($this->unsetTasks[$player->getName()]);
+			}
+			), 10 * 20);
 		}
 		
 		$form->sendToPlayer($player);
@@ -135,14 +140,14 @@ class Main extends PluginBase implements Listener
 	
 	public function OpenManageForm(Player $player, string $world){
 		if(isset($this->unsetTasks[$player->getName()])){
-			$task = $this->unsetTasks[$player->getName()];
-			if($task->getHandler() !== null)
-				$task->getHandler()->cancel();
 			unset($this->unsetTasks[$player->getName()]);
 		} else {
-			$task = new unSetArrayTask($this, $player->getName());
-			$this->getScheduler()->scheduleDelayedTask($task, 10 * 20);
-			$this->unsetTasks[$player->getName()] = $task;
+			$this->unsetTasks[$player->getName()] = 1;
+			$this->getScheduler()->scheduleDelayedTask(new ClosureTask( function() use ($player): void{
+				if(isset($this->unsetTasks[$player->getName()]))
+					unset($this->unsetTasks[$player->getName()]);
+			}
+			), 10 * 20);
 		}
 		
 		$this->manageSession[$player->getName()] = $world;
