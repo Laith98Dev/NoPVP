@@ -130,6 +130,8 @@ class Main extends PluginBase implements Listener
 			$this->getScheduler()->scheduleDelayedTask(new ClosureTask( function() use ($player): void{
 				if(isset($this->unsetTasks[$player->getName()]))
 					unset($this->unsetTasks[$player->getName()]);
+				if(isset($this->manageSession[$player->getName()]))
+					unset($this->manageSession[$player->getName()]);
 			}
 			), 10 * 20);
 		}
@@ -146,6 +148,8 @@ class Main extends PluginBase implements Listener
 			$this->getScheduler()->scheduleDelayedTask(new ClosureTask( function() use ($player): void{
 				if(isset($this->unsetTasks[$player->getName()]))
 					unset($this->unsetTasks[$player->getName()]);
+				if(isset($this->manageSession[$player->getName()]))
+					unset($this->manageSession[$player->getName()]);
 			}
 			), 10 * 20);
 		}
