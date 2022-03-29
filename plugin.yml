@@ -3,7 +3,7 @@ api: [4.0.0]
 main: Laith98Dev\NoPVP\Main
 author: Laith98Dev
 website: https://github.com/Laith98Dev
-version: 1.0.1
+version: 1.0.2
 
 commands:
   nopvp:
