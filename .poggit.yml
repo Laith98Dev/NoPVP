@@ -6,7 +6,4 @@ projects:
     NoPVP:
         path: ""
         icon: 20210908_194345.jpg
-        libs:
-            - src: jojoe77777/FormAPI/libFormAPI
-              version: ^1.3
 ...
